@@ -1,0 +1,17 @@
+services:
+     digitas_form_error_mapping.form_error_binder:
+         class: Digitas\Bundle\FormErrorMappingBundle\Form\Error\Binder\FormErrorBinder
+         arguments: [@digitas_form_error_mapping.form_field_accessor]
+     digitas_form_error_mapping.form_error_binder.by_group_ids:
+         class: Digitas\Bundle\FormErrorMappingBundle\Form\Error\Binder\FormErrorBinderGroup
+         arguments: [@digitas_form_error_mapping.form_error_binder, @digitas_form_error_mapping.form_error_factory_aggregator.by_group_ids]
+     digitas_form_error_mapping.form_field_accessor:
+         class: Digitas\Bundle\FormErrorMappingBundle\Form\Field\Accessor\FormFieldAccessor
+         arguments: []
+     digitas_form_error_mapping.form_error_provider.array:
+         class: Digitas\Bundle\FormErrorMappingBundle\Form\Error\Provider\FormGroupErrorProviderArray
+         arguments: [%digitas_form_error_mapping.form_error.group_error%]
+     digitas_form_error_mapping.form_error_factory_aggregator.by_group_ids:
+         class: Digitas\Bundle\FormErrorMappingBundle\Form\Error\FactoryAggregator\FactoryAggregatorByGroup
+         arguments: [@digitas_form_error_mapping.form_error_provider.array]
+
